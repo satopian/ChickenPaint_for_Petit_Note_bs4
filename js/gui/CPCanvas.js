@@ -356,7 +356,7 @@ export default function CPCanvas(controller) {
     };
     
     CPDefaultMode.prototype.keyDown = function(e) {
-        if (e.keyCode == 32 /* Space */) {
+        if (e.key === " ") {
             if (e.altKey) {
                 modeStack.push(rotateCanvasMode, true);
                 modeStack.peek().keyDown(e);
@@ -888,7 +888,7 @@ export default function CPCanvas(controller) {
             panningButton;
 
         this.keyDown = function(e) {
-            if (e.keyCode == 32 /* Space */) {
+            if (e.key === " ") {
                 // If we're not already panning, then advertise that a left-click would pan
                 if (!this.capture) {
                     setCursor(CURSOR_PANNABLE);
@@ -899,7 +899,7 @@ export default function CPCanvas(controller) {
         };
 
         this.keyUp = function(e) {
-            if (this.transient && panningButton != BUTTON_WHEEL && e.keyCode == 32 /* Space */) {
+            if (this.transient && panningButton != BUTTON_WHEEL && e.key === " ") {
                 setCursor(CURSOR_DEFAULT);
 
                 modeStack.pop(); // yield control to the default mode
@@ -1546,11 +1546,11 @@ export default function CPCanvas(controller) {
         };
 
         this.keyDown = function(e) {
-            if (e.keyCode == 13 /* Enter */) {
+            if (e.key === "Enter") {
                 controller.actionPerformed({action: "CPTransformAccept"});
 
                 return true;
-            } else if (e.keyCode == 27 /* Escape */) {
+            } else if (e.key === "Escape") {
                 controller.actionPerformed({action: "CPTransformReject"});
 
                 return true;
@@ -1699,7 +1699,7 @@ export default function CPCanvas(controller) {
         };
 
         this.keyUp = function(e) {
-            if (this.transient && rotateButton != BUTTON_WHEEL && e.keyCode == 32 /* Space */) {
+            if (this.transient && rotateButton != BUTTON_WHEEL && e.key === " ") {
                 setCursor(CURSOR_DEFAULT);
 
                 modeStack.pop(); // yield control to the default mode
@@ -1709,7 +1709,7 @@ export default function CPCanvas(controller) {
         };
 
         this.keyDown = function(e) {
-            if (e.keyCode == 32 /* Space */ && e.altKey) {
+            if (e.key === " " && e.altKey) {
                 // That's our hotkey, so stay in this mode (don't forward to CPDefaultMode)
                 return true;
             }

@@ -193,7 +193,7 @@ export default function CPSwatchesPalette(controller) {
             reader.readAsArrayBuffer(file);
         };
         
-        fileInput.click();
+        fileInput.trigger('click');
     }
     
     function saveSwatches() {
