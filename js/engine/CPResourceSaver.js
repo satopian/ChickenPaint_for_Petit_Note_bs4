@@ -52,36 +52,34 @@ export default function CPResourceSaver(options) {
 	function postDrawing(formData) {
 		// リクエストのオプションを設定
 		var requestOptions = {
-			method: 'POST',
-			mode: 'same-origin',
-			headers: {
-				'X-Requested-With': 'chickenpaint'
-				,
-			},
-			body: formData,
-		};
-	
+		  method: 'POST',
+		  mode: 'same-origin',
+		  headers: {
+			  'X-Requested-With': 'chickenpaint'
+			  ,
+		  },
+		  body: formData,
+		}; 
+		reportProgress(0.5);
 		// リクエストを送信
-		fetch(options.url, requestOptions)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error(`Network response was not ok (${response.status})`);
-				}
-				return response.text();
-			})
-			.then(responseText => {
-				if (/^CHIBIOK/.test(responseText)) {
-					reportProgress(1.0);
-					that.emitEvent("savingComplete");
-				} else {
-					reportFatal(responseText);
-				}
-			})
-			.catch(error => {
-				reportFatal(error.message);
-			});
-	}
+		fetch(options.url, requestOptions).then(response => {
+		  if (!response.ok) {
+			throw new Error("Network response was not ok (".concat(response.status, ")"));
+		  }
 	
+		  return response.text();
+		}).then(responseText => {
+		  if (/^CHIBIOK/.test(responseText)) {
+			reportProgress(1.0);
+			that.emitEvent("savingComplete");
+		  } else {
+			reportFatal(responseText);
+		  }
+		}).catch(error => {
+		  reportFatal(error.message);
+		});
+	  }
+		
 	// 	function postDrawing(formData) {
     //     var
     //         xhr = new XMLHttpRequest();
