@@ -67,7 +67,7 @@ function loadTextures(textureFilename, width, height, textureCount, then) {
     img.onload = function() {
         let
             canvas = document.createElement("canvas"),
-            canvasContext = canvas.getContext("2d",{				willReadFrequently: true,
+            canvasContext = canvas.getContext("2d",{
 				willReadFrequently: true,
 			});
         
