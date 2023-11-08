@@ -45,6 +45,7 @@
     "pepjs": "=0.4.3",
     "popper.js": "^1.15.0",
     "random-js": "^2.1.0",
+    "uuid": "^9.0.1",
     "wolfy87-eventemitter": "^5.2.9"
   },
   "browser": {
