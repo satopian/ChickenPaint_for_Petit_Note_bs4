@@ -105,6 +105,7 @@ export default function CPToolPalette(cpController) {
                 className: "chickenpaint-tool-water",
                 command: "CPWater",
                 toolTip: "Waterpaint",
+                shortcut: "w",
                 mode: ChickenPaint.M_DRAW,
                 tool: ChickenPaint.T_WATER
             },
@@ -120,6 +121,7 @@ export default function CPToolPalette(cpController) {
                 className: "chickenpaint-tool-soft-eraser",
                 command: "CPSoftEraser",
                 toolTip: "Soft eraser",
+                shortcut: "s",
                 mode: ChickenPaint.M_DRAW,
                 tool: ChickenPaint.T_SOFTERASER
             },
@@ -158,7 +160,7 @@ export default function CPToolPalette(cpController) {
                 command: "CPRotateCanvas",
                 commandDoubleClick: "CPResetCanvasRotation",
                 toolTip: "Rotate canvas",
-                mode: ChickenPaint.M_ROTATE_CANVAS
+				mode: ChickenPaint.M_ROTATE_CANVAS
             },
             {
                 className: "chickenpaint-tool-pan-canvas",
