@@ -209,6 +209,7 @@ const
                     name: "Flip horizontal",
                     action: "CPHFlip",
                     mnemonic: "H",
+                    shortcut: "h",
                     title: "Flips the current selected area horizontally"
                 },
                 {

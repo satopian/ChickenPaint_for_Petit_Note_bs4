@@ -345,10 +345,10 @@ export default function CPCanvas(controller) {
             // Avoid infinite recursion by only delivering the event to the new mode (don't let it bubble back to us!)
             modeStack.peek().mouseDown(e, button, pressure);
         } else if ((button == BUTTON_WHEEL && e.altKey) 
-		|| (button == BUTTON_PRIMARY && !key.default.isPressed("alt") && key.default.isPressed("r"))) {
+		|| (button == BUTTON_PRIMARY && !key.isPressed("alt") && key.isPressed("r"))) {
                 modeStack.push(rotateCanvasMode, true);
                 modeStack.peek().mouseDown(e, button, pressure);
-            } else {
+            } else if (button == BUTTON_WHEEL || spacePressed && button == BUTTON_PRIMARY){
                 modeStack.push(panMode, true);
                 modeStack.peek().mouseDown(e, button, pressure);
             }
@@ -362,8 +362,8 @@ export default function CPCanvas(controller) {
                 // We can start the pan mode before the mouse button is even pressed, so that the "grabbable" cursor appears
                 modeStack.push(panMode, true);
                 modeStack.peek().keyDown(e);
+				return true;
             }
-            return true;
     };
 
 	/**
