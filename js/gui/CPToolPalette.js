@@ -98,6 +98,7 @@ export default function CPToolPalette(cpController) {
                 className: "chickenpaint-tool-airbrush",
                 command: "CPAirbrush",
                 toolTip: "Airbrush",
+                shortcut: "a",
                 mode: ChickenPaint.M_DRAW,
                 tool: ChickenPaint.T_AIRBRUSH
             },
