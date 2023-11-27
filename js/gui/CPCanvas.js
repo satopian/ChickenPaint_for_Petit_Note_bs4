@@ -344,11 +344,10 @@ export default function CPCanvas(controller) {
             modeStack.push(colorPickerMode, true);
             // Avoid infinite recursion by only delivering the event to the new mode (don't let it bubble back to us!)
             modeStack.peek().mouseDown(e, button, pressure);
-        } else if ((button == BUTTON_WHEEL && e.altKey) 
-		|| (button == BUTTON_PRIMARY && !key.isPressed("alt") && key.isPressed("r"))) {
+        } else if (!spacePressed && button == BUTTON_PRIMARY && !e.altKey && key.isPressed("r")) {
                 modeStack.push(rotateCanvasMode, true);
                 modeStack.peek().mouseDown(e, button, pressure);
-            } else if (button == BUTTON_WHEEL || spacePressed && button == BUTTON_PRIMARY){
+            } else if (button == BUTTON_WHEEL || !e.altKey && spacePressed && button == BUTTON_PRIMARY){
                 modeStack.push(panMode, true);
                 modeStack.peek().mouseDown(e, button, pressure);
             } else {
@@ -358,10 +357,10 @@ export default function CPCanvas(controller) {
     };
     
     CPDefaultMode.prototype.keyDown = function(e) {
-			if (e.key.toLowerCase()==="r") {
+			if (e.key.toLowerCase()==="r" && e.key !== " ") {
                 modeStack.push(rotateCanvasMode, true);
                 modeStack.peek().keyDown(e);
-			} else if (e.key===" "){
+			} else if (e.key.toLowerCase() !== "r" && e.key === " " && !e.altKey){
                 // We can start the pan mode before the mouse button is even pressed, so that the "grabbable" cursor appears
                 modeStack.push(panMode, true);
                 modeStack.peek().keyDown(e);
@@ -1608,8 +1607,7 @@ export default function CPCanvas(controller) {
                 return true;
 
 				} else if (!this.transient && button == BUTTON_PRIMARY && !e.altKey && !key.isPressed("space")
-					|| (e.altKey && button == BUTTON_WHEEL)
-					|| (button == BUTTON_PRIMARY && key.isPressed("r"))) {
+					|| (button == BUTTON_PRIMARY && !e.altKey && !key.isPressed("space") && key.isPressed("r"))) {
 
 				firstClick = {x: mouseX, y: mouseY};
 
