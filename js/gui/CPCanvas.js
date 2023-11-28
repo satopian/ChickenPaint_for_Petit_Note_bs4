@@ -350,10 +350,7 @@ export default function CPCanvas(controller) {
             } else if (button == BUTTON_WHEEL || !e.altKey && spacePressed && button == BUTTON_PRIMARY){
                 modeStack.push(panMode, true);
                 modeStack.peek().mouseDown(e, button, pressure);
-            } else {
-                modeStack.push(rotateCanvasMode, false);
-                modeStack.peek().mouseDown(e, button, pressure);
-			}
+            }
     };
     
     CPDefaultMode.prototype.keyDown = function(e) {
@@ -1114,7 +1111,7 @@ export default function CPCanvas(controller) {
     CPMoveToolMode.prototype.constructor = CPMoveToolMode;
 
     CPMoveToolMode.prototype.mouseMove = function(e) {
-        if (!key.isPressed("space") && !e.altKey) {
+        if (!key.isPressed("r")) {
             setCursor(CURSOR_MOVE);
             return true;
         }
@@ -1605,7 +1602,6 @@ export default function CPCanvas(controller) {
         this.mouseDown = function(e, button, pressure) {
             if (this.capture) {
                 return true;
-
 				} else if (!this.transient && button == BUTTON_PRIMARY && !e.altKey && !key.isPressed("space")
 					|| (button == BUTTON_PRIMARY && !e.altKey && !key.isPressed("space") && key.isPressed("r"))) {
 
@@ -1691,7 +1687,7 @@ export default function CPCanvas(controller) {
 
                 this.capture = false;
 
-                if (this.transient && !(key.isPressed("space") && key.alt)) {
+                if (this.transient && !key.isPressed("r")) {
                     modeStack.pop();
                 }
 
@@ -1710,7 +1706,7 @@ export default function CPCanvas(controller) {
         };
 
         this.keyDown = function(e) {
-            if (e.key === " " && e.altKey) {
+            if (e.key.toLowerCase() === "r") {
                 // That's our hotkey, so stay in this mode (don't forward to CPDefaultMode)
                 return true;
             }
