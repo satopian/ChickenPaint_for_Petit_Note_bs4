@@ -345,7 +345,7 @@ export default function CPCanvas(controller) {
             // Avoid infinite recursion by only delivering the event to the new mode (don't let it bubble back to us!)
             modeStack.peek().mouseDown(e, button, pressure);
         } else if (!spacePressed && button == BUTTON_PRIMARY && !e.altKey && key.isPressed("r")) {
-                modeStack.push(rotateCanvasMode, true);
+			modeStack.push(rotateCanvasMode, true);
                 modeStack.peek().mouseDown(e, button, pressure);
             } else if (button == BUTTON_WHEEL || !e.altKey && spacePressed && button == BUTTON_PRIMARY){
                 modeStack.push(panMode, true);
@@ -2284,6 +2284,10 @@ export default function CPCanvas(controller) {
     }
     
     function handleKeyUp(e) {
+		//altキーを押下した直後にショートカットキーが動作しなくなる問題を修正
+		if (e.key.toLowerCase()==="alt") {//altキーが離された時のDefaultの動作をキャンセル
+			e.preventDefault();
+		}
         modeStack.keyUp(e);
     }
     
