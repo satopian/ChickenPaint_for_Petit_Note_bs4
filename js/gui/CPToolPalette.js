@@ -130,6 +130,7 @@ export default function CPToolPalette(cpController) {
                 className: "chickenpaint-tool-smudge",
                 command: "CPSmudge",
                 toolTip: "Smudge",
+                shortcut: "d",
                 mode: ChickenPaint.M_DRAW,
                 tool: ChickenPaint.T_SMUDGE
             },
@@ -137,6 +138,7 @@ export default function CPToolPalette(cpController) {
                 className: "chickenpaint-tool-blender",
                 command: "CPBlender",
                 toolTip: "Blender",
+                shortcut: "c",
                 mode: ChickenPaint.M_DRAW,
                 tool: ChickenPaint.T_BLENDER
             },
