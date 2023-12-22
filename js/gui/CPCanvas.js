@@ -455,7 +455,7 @@ export default function CPCanvas(controller) {
     CPDrawingMode.prototype.resume = CPDrawingMode.prototype.enter;
 
     CPDrawingMode.prototype.paint = function() {
-        if (this.shouldPaintBrushPreview) {
+        // if (this.shouldPaintBrushPreview) {//円カーソルを表示したままにする
             this.shouldPaintBrushPreview = false;
 
             var
@@ -480,7 +480,7 @@ export default function CPCanvas(controller) {
             } else {
                 this.oldPreviewRect.union(r);
             }
-        }
+        // }
     };
 
     function CPFreehandMode() {
