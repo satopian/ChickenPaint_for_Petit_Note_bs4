@@ -57,13 +57,14 @@ export default function CPGridDialog(parent, canvas) {
     
     gridSizeElem.val(canvas.getGridSize());
     
-    $(".chickenpaint-apply-grid-settings", dialog).on('click',function(e) {
-        var
-            gridSize = parseInt(gridSizeElem.val(), 10);
-        
-        canvas.setGridSize(gridSize);
-    });
- 
+	function applyButtonClickHandler() {
+		var gridSize = parseInt(gridSizeElem.val(), 10);
+		canvas.setGridSize(gridSize);
+		dialog.modal('hide'); // モーダルを手動で閉じる
+	}
+	
+	applyButton.on('click', applyButtonClickHandler);
+	 
     dialog
         .modal({
             show: false
@@ -72,8 +73,9 @@ export default function CPGridDialog(parent, canvas) {
             gridSizeElem.trigger('focus');
         }).on('keypress', function(e) {
             if (e.key === "Enter") {
-                applyButton.trigger('click');
-            }
+				e.preventDefault(); // デフォルトのフォーム送信を阻止
+				applyButtonClickHandler(); // applyButtonのクリック関数を呼び出す
+			}
         });
     
     // Fix the backdrop location in the DOM by reparenting it to the chickenpaint container
